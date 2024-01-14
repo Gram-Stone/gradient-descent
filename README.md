@@ -1,5 +1,5 @@
 # gradient-descent
-An implementation of the gradient descent algorithm that learns a function fitting some synthetic training data.
+An implementation of the [gradient descent algorithm](https://en.wikipedia.org/wiki/Gradient_descent) that learns a function fitting some synthetic training data.
 
 Source Code Guide:
 
