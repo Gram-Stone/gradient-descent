@@ -1,4 +1,4 @@
-#lang racket
+#lang racket/base
 
 ;; This module contains the model, procedures for computing the quadratic loss of points and functions, and provides the loss function.
 

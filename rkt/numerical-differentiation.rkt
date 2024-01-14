@@ -1,4 +1,4 @@
-#lang racket
+#lang racket/base
 
 ;; This module provides the numerical differentiation algorithm.
 
