@@ -11,8 +11,8 @@
 ;; a weight that minimizes the model's loss function given some training data.
 
 (define (gradient-descent initial-weight iterations learning-rate)
-  (define weight initial-weight)
-  (define gradient (differentiate learning-rate loss-function))
-  (for ([i (in-range iterations)])
-    (set! weight (- weight (* learning-rate (gradient weight)))))
-  weight)
+  (let ([weight initial-weight]
+        [gradient (differentiate learning-rate loss-function)])
+    (for ([i (in-range iterations)])
+      (set! weight (- weight (* learning-rate (gradient weight)))))
+    weight))
