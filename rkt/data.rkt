@@ -13,11 +13,10 @@
 ;; Samples a pair from a given function f with random x-component between x-start and x-stop exclusive
 ;; and adds Gaussian noise with the given variance to the y-component of the sampled pair.
 (define (sample-point x-start x-stop variance f)
-  (define x (random-between x-start x-stop))
-  (define noise (* (sample (normal-dist)) variance))
-  (define y (+ (f x) noise))
-  
-  (cons x y))
+  (let* ([x (random-between x-start x-stop)]
+         [noise (* (sample (normal-dist)) variance)]
+         [y (+ (f x) noise)])
+    (cons x y)))
 
 ;; Returns a list of pairs of length count, each returned from sample-point evaluated on x-start, x-stop, variance, and f.
 (define (create-data count x-start x-stop variance f)
