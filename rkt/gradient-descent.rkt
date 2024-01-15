@@ -12,9 +12,7 @@
 
 (define (gradient-descent initial-weight iterations learning-rate)
   (define weight initial-weight)
-  (define (iterate weight loss-function)
-    ((differentiate learning-rate loss-function) weight))
-  
+  (define gradient (differentiate learning-rate loss-function))
   (for ([i (in-range iterations)])
-    (set! weight (- weight (* learning-rate (iterate weight loss-function)))))
+    (set! weight (- weight (* learning-rate (gradient weight)))))
   weight)
