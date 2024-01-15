@@ -11,11 +11,10 @@
 
 ;; Given a data point and a function, returns the quadratic loss.
 (define (point-loss pt f)
-  (define expected (cdr pt))
-  (define actual (f (car pt)))
-  (define error (abs(- actual expected)))
-
-  (* error error))
+  (let* ([expected (cdr pt)]
+         [actual (f (car pt))]
+         [error (abs(- actual expected))])
+    (* error error)))
 
 ;; Given training data and a function, returns the quadratic loss.
 (define (loss data f)
