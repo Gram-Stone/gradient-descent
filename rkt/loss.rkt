@@ -4,15 +4,16 @@
 
 (provide loss)
 
-(require "utils.rkt")
+(require math/flonum
+         "utils.rkt")
 
 ;; Given a data point and a function, returns the quadratic loss.
 (define (point-loss pt f)
   (let* ([expected (cdr pt)]
          [actual (f (car pt))]
-         [error (abs (- actual expected))])
-    (sqr error)))
+         [error (flabs (fl- actual expected))])
+    (flsqr error)))
 
 ;; Given a list of data points and a function, returns the quadratic loss.
 (define (loss data f)
-  (foldl (λ (pt acc) (+ acc (point-loss pt f))) 0.0 data))
+  (foldl (λ (pt acc) (fl+ acc (point-loss pt f))) 0.0 data))

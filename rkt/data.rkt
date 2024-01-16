@@ -5,6 +5,7 @@
 (provide data)
 
 (require math/distributions
+         math/flonum
          "utils.rkt")
 
 ;; Defines the amplitude of the sine function used to generate the training data.
@@ -14,8 +15,8 @@
 ;; and adds Gaussian noise with the given variance to the y-component of the sampled pair.
 (define (sample-point x-start x-stop variance f)
   (let* ([x (random-between x-start x-stop)]
-         [noise (* (sample (normal-dist)) variance)]
-         [y (+ (f x) noise)])
+         [noise (fl* (sample (normal-dist)) variance)]
+         [y (fl+ (f x) noise)])
     (cons x y)))
 
 ;; Returns a list of pairs of length count, each returned from sample-point evaluated on x-start, x-stop, variance, and f.
@@ -24,4 +25,4 @@
     (sample-point x-start x-stop variance f)))
 
 ;; Creates some training data.
-(define data (create-data 40 -6.0 6.0 5.0 (λ (x) (* amplitude (sin x)))))
+(define data (create-data 40 -6.0 6.0 5.0 (λ (x) (fl* (->fl amplitude) (flsin x)))))

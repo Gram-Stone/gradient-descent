@@ -4,7 +4,8 @@
 
 (provide gradient-descent)
 
-(require "loss.rkt"
+(require math/flonum
+         "loss.rkt"
          "numerical-differentiation.rkt")
 
 ;; Given a model, some training data, an initial weight, a learning rate,
@@ -14,6 +15,6 @@
 (define (gradient-descent model data initial-weight learning-rate iterations)
   (let* ([loss-function (λ (weight) (loss data (model weight)))]
          [gradient (differentiate loss-function)])
-    (for/fold ([weight initial-weight])
+    (for/fold ([weight (->fl initial-weight)])
               ([i (in-range iterations)])
-      (- weight (* learning-rate (gradient weight))))))
+      (fl- weight (fl* learning-rate (gradient weight))))))
