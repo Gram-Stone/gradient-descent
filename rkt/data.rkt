@@ -2,10 +2,10 @@
 
 ;; This module provides the synthetic training data.
 
+(provide data)
+
 (require math/distributions
          "utils.rkt")
-
-(provide data)
 
 ;; Defines the amplitude of the sine function used to generate the training data.
 (define amplitude 5)
