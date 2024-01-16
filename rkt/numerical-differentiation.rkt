@@ -8,5 +8,5 @@
 
 ;; Given a function f, returns an estimator of the derivative of f at x.
 (define (differentiate f)
-  (λ (x) (let ([h (if (zero? x) 0.01 (* (sqrt epsilon.0) x))])
-           (/ (- (f (+ x h)) (f x)) h))))
+  (λ (x) (let ([h (if (fl= x 0.0) 0.01 (fl* (flsqrt epsilon.0) x))])
+           (fl/ (fl- (f (fl+ x h)) (f x)) h))))
