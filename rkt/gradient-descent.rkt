@@ -12,9 +12,8 @@
 ;; loss function.
 
 (define (gradient-descent model data initial-weight learning-rate iterations)
-  (let* ([weight initial-weight]
-         [loss-function (λ (weight) (loss data (model weight)))]
+  (let* ([loss-function (λ (weight) (loss data (model weight)))]
          [gradient (differentiate loss-function)])
-    (for ([i (in-range iterations)])
-      (set! weight (- weight (* learning-rate (gradient weight)))))
-    weight))
+    (for/fold ([weight initial-weight])
+              ([i (in-range iterations)])
+      (- weight (* learning-rate (gradient weight))))))
