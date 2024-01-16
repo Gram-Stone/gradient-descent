@@ -4,6 +4,9 @@
 
 (provide differentiate)
 
-;; Given a step h and a function f, returns an estimator of the derivative of f with step h.
-(define (differentiate h f)
-  (λ (x) (/ (- (f (+ x h)) (f x)) h)))
+(require math/flonum)
+
+;; Given a function f, returns an estimator of the derivative of f at x.
+(define (differentiate f)
+  (λ (x) (let ([h (if (zero? x) 0.01 (* (sqrt epsilon.0) x))])
+           (/ (- (f (+ x h)) (f x)) h))))
